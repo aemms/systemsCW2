@@ -1,13 +1,13 @@
-<?php include_once('header.php') ?>
+<?php include('header.php') ?>
 <body>
     <h2>Search</h2> 
      <form name="search" method="post" action="<?=$PHP_SELF?>">
-        Seach for: <input type="text" name="find" /> in 
-        <Select NAME="field">
-        <Option VALUE="name">Name</option>
-        <Option VALUE="email">Email</option>
-        <Option VALUE="companyName">Company Name</option>
-    </Select>
+        Search for: <input type="text" name="find" /> in 
+        <select NAME="field">
+            <option VALUE="name">Name</option>
+            <option VALUE="email">Email</option>
+            <option VALUE="companyName">Company Name</option>
+        </select>
         <input type="hidden" name="searching" value="yes" />
         <input type="submit" name="search" value="Search" />
      </form>
@@ -69,4 +69,4 @@
      } 
      ?> 
 </body>
-<?php include_once("footer.php") ?>
+<?php include("footer.php") ?>
