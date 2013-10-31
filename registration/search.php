@@ -1,4 +1,4 @@
-<?php include_once('header') ?>
+<?php include_once('header.php') ?>
 <body>
 <h1>Register here!</h1>
 <p>Fill in your name and email address, then click <strong>Submit</strong> to register.</p>
@@ -48,4 +48,4 @@
     }
 ?>
 </body>
-<?php include_once("footer") ?>
+<?php include_once("footer.php") ?>
