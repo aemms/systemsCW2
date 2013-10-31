@@ -31,7 +31,7 @@
      // We preform a bit of filtering 
 
      //Now we search for our search term, in the field the user specified 
-     $data = mysql_query("SELECT * FROM registration_tbl WHERE name LIKE '%{$find}%' OR email LIKE '%{$find}%' OR companyName LIKE '%{$find}%';"); 
+     $data = mysql_query("SELECT * FROM registration_tbl WHERE $field LIKE '%{$find}%';"); 
      
      //And we display the results 
      while($result = mysql_fetch_array( $data )) 
