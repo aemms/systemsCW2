@@ -1,23 +1,6 @@
 <?php include_once('header.php') ?>
 <body>
-<h1>Register here!</h1>
-<p>Fill in your name and email address, then click <strong>Submit</strong> to register.</p>
-<form method="post" action="index.php" enctype="multipart/form-data" >
-      Name  <input type="text" name="name" id="name"/></br>
-      Email <input type="text" name="email" id="email"/></br>
-      Company Name <input type="text" name="companyName" id="companyName"/></br>
-      <input type="submit" name="submit" value="Submit" />
-</form>
-<?php
-    // DB connection info
-    //TODO: Update the values for $host, $user, $pwd, and $db
-    // Database=systemsA12lVzdp3;Data Source=eu-cdbr-azure-west-b.cloudapp.net;User Id=b4d71357152f0e;Password=ed689257
-    $host = "eu-cdbr-azure-west-b.cloudapp.net";
-    $user = "b4d71357152f0e";
-    $pwd = "ed689257";
-    $db = "systemsA12lVzdp3";
-
-     <h2>Search</h2> 
+    <h2>Search</h2> 
      <form name="search" method="post" action="<?=$PHP_SELF?>">
         Seach for: <input type="text" name="find" /> in 
         <Select NAME="field">
@@ -28,6 +11,14 @@
         <input type="hidden" name="searching" value="yes" />
         <input type="submit" name="search" value="Search" />
      </form>
+<?php
+    // DB connection info
+    //TODO: Update the values for $host, $user, $pwd, and $db
+    // Database=systemsA12lVzdp3;Data Source=eu-cdbr-azure-west-b.cloudapp.net;User Id=b4d71357152f0e;Password=ed689257
+    $host = "eu-cdbr-azure-west-b.cloudapp.net";
+    $user = "b4d71357152f0e";
+    $pwd = "ed689257";
+    $db = "systemsA12lVzdp3";
 
         <? 
      //This is only displayed if they have submitted the form 
