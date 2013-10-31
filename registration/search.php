@@ -12,15 +12,6 @@
         <input type="submit" name="search" value="Search" />
      </form>
 <?php
-    // DB connection info
-    //TODO: Update the values for $host, $user, $pwd, and $db
-    // Database=systemsA12lVzdp3;Data Source=eu-cdbr-azure-west-b.cloudapp.net;User Id=b4d71357152f0e;Password=ed689257
-    $host = "eu-cdbr-azure-west-b.cloudapp.net";
-    $user = "b4d71357152f0e";
-    $pwd = "ed689257";
-    $db = "systemsA12lVzdp3";
-
-        <? 
      //This is only displayed if they have submitted the form 
      if ($searching =="yes") 
      { 
@@ -29,7 +20,7 @@
      //If they did not enter a search term we give them an error 
      if ($find == "") 
      { 
-     echo "<p>You forgot to enter a search term"; 
+     echo "<p>You forgot to enter a search term</p>"; 
      exit; 
      } 
      
@@ -38,12 +29,9 @@
      mysql_select_db("systemsA12lVzdp3") or die(mysql_error()); 
      
      // We preform a bit of filtering 
-     $find = strtoupper($find); 
-     $find = strip_tags($find); 
-     $find = trim ($find); 
-     
+
      //Now we search for our search term, in the field the user specified 
-     $data = mysql_query("SELECT * FROM registration_tbl WHERE name LIKE '%{$term}%' OR email LIKE '%{$term}%' OR companyName LIKE '%{$term}%';"); 
+     $data = mysql_query("SELECT * FROM registration_tbl WHERE name LIKE '%{$find}%' OR email LIKE '%{$find}%' OR companyName LIKE '%{$find}%';"); 
      
      //And we display the results 
      while($result = mysql_fetch_array( $data )) 
