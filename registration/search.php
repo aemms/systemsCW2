@@ -41,7 +41,6 @@
             echo " </td></tr>";
         }
         echo "</table>";
-        echo "HELLO!";
     }
 ?>
 </body>
