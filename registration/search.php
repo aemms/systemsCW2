@@ -1,4 +1,4 @@
-<?php include('header.php') ?>
+<?php require_once('header.php') ?>
 <body>
     <h2>Search</h2> 
      <form name="search" method="post" action="<?=$PHP_SELF?>">
@@ -69,4 +69,4 @@
      } 
      ?> 
 </body>
-<?php include("footer.php") ?>
+<?php require_once("footer.php") ?>
