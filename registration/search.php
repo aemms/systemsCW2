@@ -1,47 +1,65 @@
 <?php require_once('header.php') ?>
 <body>
-    <<h1>Search</h1>
-<p>Fill in the name to search then click <strong>Submit</strong> to search.</p>
-<form name="search" method="post" action="search.php">
-    Search:<input type="text" name="query" value=""/>
-    <input type="submit" name="searchClick" value="Find" />
+<h1>Search Register here!</h1>
+<p>Fill in your name then click <strong>Submit</strong> to search.</p>
+<form method="post" action="search.php" enctype="multipart/form-data" >
+      Name  <input type="text" name="name" id="name"/></br>
+   
+      <input type="submit" name="submit" value="Submit" />
 </form>
-
 <?php
+    // DB connection info
+    //TODO: Update the values for $host, $user, $pwd, and $db
+    //using the values you retrieved earlier from the portal.
     $host = "eu-cdbr-azure-west-b.cloudapp.net";
     $user = "b4d71357152f0e";
     $pwd = "ed689257";
     $db = "systemsA12lVzdp3";
-    if(isset($_POST['searchClick'])) {
-        $term = $_POST['query'];
-        
-        // connect to DB
-        mysql_connect($host, $user, $pwd);
-        mysql_select_db($db);
-
-        $find = mysql_query("SELECT * FROM registration_tbl WHERE name LIKE '%{$term}%' OR email LIKE '%{$term}%' OR companyName LIKE '%{$term}%';");
-
-        echo "<table>
-              <th>Name Results</th>
-              <th>Email Results</th>
-              <th>Company Name Results</th>
-              <br>
-             ";
-
-        while($row = mysql_fetch_array($find)) {
-            echo "<tr><td>";  
-            echo $row['name'];
-            echo " </td>";
-            echo "<td>";
-            echo $row['email'];
-            echo " </td>";
-            echo "<td>";
-            echo $row['companyName'];
-            echo "<br>";
-            echo " </td></tr>";
+    // Connect to database.
+    try {
+        $conn = new PDO( "mysql:host=$host;dbname=$db", $user, $pwd);
+        $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+    }
+    catch(Exception $e){
+        die(var_dump($e));
+    }
+    // Insert registration info
+    if(!empty($_POST)) {
+    try {
+        $name = $_POST['name'];
+        // Insert data
+        $sql_select = "select * from registration_tbl where name LIKE CONCAT ('%',?,'%')";
+        $stmt = $conn->prepare($sql_select);
+        $stmt->bindValue(1, $name);
+        $stmt->execute();
+ $registrants = $stmt->fetchAll();
+    if(count($registrants) > 0) {
+        echo "<h2>People who are registered:</h2>";
+        echo "<table>";
+        echo "<tr><th>Name</th>";
+        echo "<th>Email</th>";
+        echo "<th>Company</th>";
+        echo "<th>Date</th></tr>";
+        foreach($registrants as $registrant) {
+            echo "<tr><td>".$registrant['name']."</td>";
+            echo "<td>".$registrant['email']."</td>";
+            echo "<td>".$registrant['company']."</td>";
+            echo "<td>".$registrant['date']."</td></tr>";
         }
         echo "</table>";
+    } else {
+        echo "<h3>No one is currently registered.</h3>";
     }
+ 
+    }
+    catch(Exception $e) {
+        die(var_dump($e));
+    }
+    echo "<h3>Your're registered!</h3>";
+    }
+    // Retrieve data
+ 
+   
 ?>
 </body>
 <?php require_once("footer.php") ?>
