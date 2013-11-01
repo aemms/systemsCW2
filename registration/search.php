@@ -32,25 +32,24 @@
         $stmt = $conn->prepare($sql_select);
         $stmt->bindValue(1, $name);
         $stmt->execute();
- $registrants = $stmt->fetchAll();
-    if(count($registrants) > 0) {
-        echo "<h2>People who are registered:</h2>";
-        echo "<table>";
-        echo "<tr><th>Name</th>";
-        echo "<th>Email</th>";
-        echo "<th>Company</th>";
-        echo "<th>Date</th></tr>";
-        foreach($registrants as $registrant) {
-            echo "<tr><td>".$registrant['name']."</td>";
-            echo "<td>".$registrant['email']."</td>";
-            echo "<td>".$registrant['company']."</td>";
-            echo "<td>".$registrant['date']."</td></tr>";
+        $rows = $stmt->fetchAll();
+        if(count($rows) > 0) {
+            echo "<h2>Records:</h2>";
+            echo "<table>";
+            echo "<tr><th>Name</th>";
+            echo "<th>Email</th>";
+            echo "<th>Company</th>";
+            echo "<th>Date</th></tr>";
+            foreach($rows as $row) {
+                echo "<tr><td>".$row['name']."</td>";
+                echo "<td>".$row['email']."</td>";
+                echo "<td>".$row['company']."</td>";
+                echo "<td>".$row['date']."</td></tr>";
+            }
+            echo "</table>";
+        } else {
+            echo "<h3>No one is currently registered.</h3>";
         }
-        echo "</table>";
-    } else {
-        echo "<h3>No one is currently registered.</h3>";
-    }
- 
     }
     catch(Exception $e) {
         die(var_dump($e));
@@ -59,7 +58,6 @@
     }
     // Retrieve data
  
-   
 ?>
 </body>
 <?php require_once("footer.php") ?>
