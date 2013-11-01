@@ -29,10 +29,14 @@
         $name = $_POST['name'];
         // Insert data
         $sql_select = "select * from registration_tbl where name LIKE CONCAT ('%',?,'%')";
+
         $stmt = $conn->prepare($sql_select);
+
         $stmt->bindValue(1, $name);
         $stmt->execute();
+
         $rows = $stmt->fetchAll();
+        
         if(count($rows) > 0) {
             echo "<h2>Records:</h2>";
             echo "<table>";
